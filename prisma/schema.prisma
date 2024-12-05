@@ -46,7 +46,7 @@ model Product {
 
 model Cart {
   id         String   @id @default(uuid())
-  userId     String
+  userId     String   @unique
   isActive   Boolean  @default(true) // Indica si el carrito está activo
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
