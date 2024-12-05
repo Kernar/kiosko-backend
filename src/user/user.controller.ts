@@ -22,6 +22,20 @@ export class UserController {
     async createUser(@Body() data: User) {
       return this.userService.createUser(data);
     }
+
+    @Post('login')
+  async login(@Body() loginData: { username: string; password: string }) {
+    const { username, password } = loginData;
+    // Llama a tu servicio para verificar las credenciales
+    const user = await this.userService.validateUser(username, password);
+    if (!user) {
+      throw new NotFoundException('Usuario o contraseña incorrectos');
+    }
+    // Aquí puedes generar un JWT u otro token
+    return { message: 'Login exitoso', user };  // O puedes devolver un JWT
+  }
+
+    
   
     @Put(':id')
     async updateUser(@Param('id') id: string, @Body() data: User) {

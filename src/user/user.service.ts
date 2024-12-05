@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-
+import * as bcrypt from 'bcrypt';  // Para comparar contraseñas
 
 @Injectable()
 export class UserService {
@@ -49,4 +49,26 @@ export class UserService {
         },
       });
     }
+
+    async validateUser(username: string, password: string): Promise<User | null> {
+      try {
+        const user = await this.prisma.user.findUnique({
+          where: { username },
+        });
+        if (!user) {
+          return null;  // Usuario no encontrado
+        }
+    
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+          return null;  // Contraseña incorrecta
+        }
+    
+        return user;
+      } catch (error) {
+        console.error('Error al validar usuario:', error);  // Log de error
+        throw new InternalServerErrorException('Error interno al validar usuario');
+      }
+    }
+    
 }
