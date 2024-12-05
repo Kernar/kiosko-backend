@@ -6,11 +6,12 @@ import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { ProductModule } from './product/product.module';
-
+import { CartItemModule } from './cartItem/cartItem.module';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
-    UserModule, PrismaModule, ProductModule
+    UserModule, PrismaModule, ProductModule, CartItemModule, CartModule
   ],
   controllers: [AppController, UserController],
   providers: [AppService, UserService],

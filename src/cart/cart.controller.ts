@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { CartService } from "./cart.service";
 
-@Controller('cart')
+@Controller('carts')
 export class CartController {
     constructor(private readonly cartService: CartService) {}
 
