@@ -18,6 +18,14 @@ export class UserService {
         },
       });
     }
+
+    // En user.service.ts
+    async getUserByEmail(email: string): Promise<User> {
+      return this.prisma.user.findUnique({
+        where: { email },
+      });
+    }
+
   
     async createUser(data: User): Promise<User> {
       return this.prisma.user.create({

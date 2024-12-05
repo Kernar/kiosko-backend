@@ -8,10 +8,11 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ProductModule } from './product/product.module';
 import { CartItemModule } from './cartItem/cartItem.module';
 import { CartModule } from './cart/cart.module';
+import { PassResetModule } from './password-reset/pass-reset.module';
 
 @Module({
   imports: [
-    UserModule, PrismaModule, ProductModule, CartItemModule, CartModule
+    UserModule, PrismaModule, ProductModule, CartItemModule, CartModule, PassResetModule
   ],
   controllers: [AppController, UserController],
   providers: [AppService, UserService],

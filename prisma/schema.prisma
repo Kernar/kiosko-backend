@@ -97,8 +97,8 @@ model OrderItem {
 
 model PasswordReset {
   id         String   @id @default(uuid())
-  userId     String
-  token      String
+  userId     String   
+  token      String   @unique
   createdAt  DateTime @default(now())
   expiresAt  DateTime
   user       User     @relation(fields: [userId], references: [id])
